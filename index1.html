@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Fireworks | Premium Fireworks Displays</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Oswald for punchy headers, Inter for clean readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #050814;
+            --bg-darker: #02040a;
+            --bg-card: #0a0f24;
+            --brand-gold: #F5C518;
+            --brand-gold-glow: rgba(245, 197, 24, 0.4);
+            --brand-red: #E63946;
+            --brand-red-glow: rgba(230, 57, 70, 0.4);
+            --text-light: #F8F9FA;
+            --text-muted: #A0AABF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Utility for fade-in animations on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .navbar {
+            background-color: transparent;
+            transition: background-color 0.4s ease, padding 0.4s ease;
+            padding: 1.5rem 0;
+        }
+        .navbar.scrolled {
+            background-color: rgba(5, 8, 20, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .navbar-brand {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--text-light) !important;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand img {
+            max-height: 60px;
+            width: auto;
+            transition: max-height 0.4s ease;
+        }
+        .navbar.scrolled .navbar-brand img {
+            max-height: 45px;
+        }
+        .brand-sparkle { color: var(--brand-gold); }
+        .brand-pyro { color: var(--brand-red); }
+        
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 10px;
+            position: relative;
+            cursor: pointer;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px;
+            bottom: 0; left: 0;
+            background-color: var(--brand-gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active-nav::after {
+            width: 100%;
+        }
+
+        .btn-gold {
+            background-color: var(--brand-gold);
+            color: var(--bg-darker);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 12px 32px;
+            border-radius: 4px;
+            border: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .btn-gold:hover {
+            background-color: #ffe066;
+            color: var(--bg-darker);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--brand-gold-glow);
+        }
+        .btn-red {
+            background-color: var(--brand-red);
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: 4px;
+            border: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .btn-red:hover {
+            background-color: #ff4d5a;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--brand-red-glow);
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            z-index: -2;
+            transform: scale(1.05);
+            animation: slowZoom 20s infinite alternate;
+        }
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(2, 4, 10, 0.9) 0%, rgba(10, 15, 36, 0.6) 100%);
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .section-padding { padding: 7rem 0; }
+        
+        .history-section {
+            background-color: var(--bg-darker);
+            position: relative;
+        }
+        .section-header {
+            margin-bottom: 4rem;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            display: inline-block;
+            position: relative;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 60px; height: 4px;
+            background-color: var(--brand-red);
+            bottom: -15px; left: 0;
+        }
+        .text-center .section-header h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .history-image-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .history-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 0 2px rgba(245, 197, 24, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .form-section {
+            background: linear-gradient(to bottom, var(--bg-dark), var(--bg-darker));
+        }
+        .glass-card {
+            background: rgba(10, 15, 36, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        
+        /* Floating labels customization for dark theme */
+        .form-floating > .form-control,
+        .form-floating > .form-select {
+            background-color: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light);
+            border-radius: 6px;
+        }
+        .form-floating > .form-control:focus,
+        .form-floating > .form-select:focus {
+            background-color: rgba(255,255,255,0.06);
+            border-color: var(--brand-gold);
+            box-shadow: 0 0 0 0.25rem rgba(245, 197, 24, 0.25);
+            color: var(--text-light);
+        }
+        .form-floating > label {
+            color: var(--text-muted);
+        }
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label,
+        .form-floating > .form-select ~ label {
+            color: var(--brand-gold);
+            background-color: transparent;
+            padding-left: 1rem;
+        }
+        
+        /* Fix for select padding in floating label */
+        .form-floating > .form-select {
+            padding-top: 1.625rem;
+            padding-bottom: 0.625rem;
+        }
+
+        .services-section {
+            background-color: var(--bg-darker);
+        }
+        .service-card {
+            background-color: var(--bg-card);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            height: 100%;
+            border: 1px solid rgba(255,255,255,0.02);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(230, 57, 70, 0.3);
+        }
+        .service-icon {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, rgba(230,57,70,0.1), transparent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--brand-red);
+            margin: 0 auto 2rem auto;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .service-icon {
+            background: var(--brand-red);
+            color: white;
+            box-shadow: 0 10px 20px var(--brand-red-glow);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-auto-rows: 250px;
+            grid-auto-flow: dense;
+            gap: 15px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        /* Create dynamic sizing for gallery items */
+        @media (min-width: 768px) {
+            .gallery-item.wide { grid-column: span 2; }
+            .gallery-item.tall { grid-row: span 2; }
+        }
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-caption {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,8,20,0.9) 0%, transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+        .gallery-caption h4 {
+            color: var(--brand-gold);
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .cta-section {
+            background: url('https://images.unsplash.com/photo-1542282811-943ef1a977c3?q=80&w=1920&auto=format&fit=crop') center/cover fixed;
+            position: relative;
+            text-align: center;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(5, 8, 20, 0.85);
+        }
+        .cta-content { position: relative; z-index: 2; }
+
+        footer {
+            background-color: #020308;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* View Transition Animation */
+        .view-container {
+            animation: fadeInView 0.5s ease forwards;
+        }
+        @keyframes fadeInView {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .d-none { display: none !important; }
+
+        @media (max-width: 991px) {
+            .navbar { padding: 1rem 0; background-color: rgba(5, 8, 20, 0.98); }
+            .glass-card { padding: 2rem 1.5rem; }
+            .section-padding { padding: 5rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" onclick="app.navigate('home')">
+               <img src="assets/classiclogo.png" alt="Classic Fireworks Logo" class="brand-logo-img me-3">
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-light fs-3"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active-nav" id="nav-home" onclick="app.navigate('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-services" onclick="app.navigate('services')">Services & Gallery</a>
+                    </li>
+                    <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                        <button class="btn btn-gold btn-sm py-2 px-4" onclick="app.navigate('home', 'contact')">Book a Display</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= PAGE 1: HOME ================= -->
+    <div id="page-home" class="view-container">
+        
+        <header class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="container relative z-index-2">
+                <div class="row">
+                    <div class="col-lg-8 col-xl-7">
+                        <h1 class="hero-title reveal">Mastering the Art of <span style="color: var(--brand-gold);">Illumination</span></h1>
+                        <p class="hero-subtitle reveal" style="transition-delay: 0.2s;">Transforming the night sky for over three decades. From private luxury events to massive civic celebrations, we deliver flawless, safe, and breathtaking pyrotechnic choreography.</p>
+                        <div class="reveal" style="transition-delay: 0.4s;">
+                            <button class="btn btn-gold me-3 mb-3" onclick="app.scrollTo('contact')">Get an Estimate</button>
+                            <button class="btn btn-outline-light mb-3 font-oswald text-uppercase fw-semibold" style="padding: 12px 32px; border-radius: 4px;" onclick="app.navigate('services')">Explore Our Work</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="history-section section-padding" id="history">
+            <div class="container">
+                <div class="row align-items-center gx-lg-5">
+                    <div class="col-lg-6 mb-5 mb-lg-0 reveal">
+                        <div class="history-image-wrapper">
+                            <img src="assets/banner1.png" alt="Fireworks over water" class="img-fluid w-100">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 reveal" style="transition-delay: 0.2s;">
+                        <div class="section-header mb-4">
+                            <h2>Decades of Dazzle</h2>
+                        </div>
+                        <p class="lead text-light mb-4" style="font-weight: 300;">Founded in 1990 by master pyrotechnicians, Classic Fireworks is an industry leader in custom aerial artistry.</p>
+                        <p class="mb-4">We believe every significant moment deserves a grand finale. Our dedicated crew combines state-of-the-art electronic firing systems with meticulous artistic choreography to paint the heavens. With an unblemished safety record, we handle everything from permits to post-show cleanup.</p>
+                        
+                        <div class="row mt-5">
+                            <div class="col-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-shield-halved text-success fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="mb-0 text-light">Licensed & Insured</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-music text-danger fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="mb-0 text-light">Musical Sync</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-calendar-check text-warning fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="mb-0 text-light">5,000+ Shows</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="form-section section-padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center reveal mb-5">
+                        <div class="section-header">
+                            <h2>Ignite Your Event</h2>
+                        </div>
+                        <p>Provide us with the details of your upcoming event. Our designers will review your requirements and follow up with a bespoke proposal within 24 hours.</p>
+                    </div>
+                </div>
+                
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-xl-8 reveal" style="transition-delay: 0.2s;">
+                        <div class="glass-card">
+                            <form id="intakeForm" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="clientName" placeholder="John Doe" required>
+                                            <label for="clientName">Full Name *</label>
+                                            <div class="invalid-feedback">Name is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control" id="clientPhone" placeholder="123-456-7890" required>
+                                            <label for="clientPhone">Phone Number *</label>
+                                            <div class="invalid-feedback">Valid phone number is required.</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="clientEmail" placeholder="name@example.com" required>
+                                            <label for="clientEmail">Email Address *</label>
+                                            <div class="invalid-feedback">Valid email is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control" id="eventDate" required>
+                                            <label for="eventDate">Event Date *</label>
+                                            <div class="invalid-feedback">Date is required.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="venueSize" aria-label="Venue Size" required>
+                                                <option value="" selected disabled>Select...</option>
+                                                <option value="small">Intimate (Private Party, Small Wedding)</option>
+                                                <option value="medium">Standard (Large Wedding, Corporate Gala)</option>
+                                                <option value="large">Grand (Festival, Concert, City Event)</option>
+                                                <option value="massive">Spectacle (Stadium, National Holiday)</option>
+                                            </select>
+                                            <label for="venueSize">Event Scale / Venue Size *</label>
+                                            <div class="invalid-feedback">Please select an event scale.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" id="clientMessage" placeholder="Vision" style="height: 120px" required></textarea>
+                                            <label for="clientMessage">Tell us about your vision (colors, music, venue specifics) *</label>
+                                            <div class="invalid-feedback">Please provide some details.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="btn btn-red w-100 py-3 fs-5" id="submitBtn">
+                                            Submit Inquiry <i class="fa-solid fa-paper-plane ms-2"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Feedback Alert -->
+                                <div id="formFeedback" class="alert mt-4 d-none mb-0" role="alert"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= PAGE 2: SERVICES & GALLERY ================= -->
+    <div id="page-services" class="view-container d-none">
+        
+        <!-- Header Spacer -->
+        <div style="height: 80px; background-color: var(--bg-dark);"></div>
+
+        <section class="services-section section-padding">
+            <div class="container">
+                <div class="text-center mb-5 reveal">
+                    <div class="section-header">
+                        <h2>Our Expertise</h2>
+                    </div>
+                    <p class="lead text-muted max-w-75 mx-auto">Engineered perfection for any scale. We craft bespoke experiences tailored to your specific audience and venue.</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4 reveal" style="transition-delay: 0.1s;">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                            <h4>Private & Weddings</h4>
+                            <p class="text-muted mt-3 mb-0">Elegant, romantic displays. We offer low-debris and quiet fireworks options perfect for sensitive venues or exclusive estates.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
+                            <h4>Corporate Events</h4>
+                            <p class="text-muted mt-3 mb-0">High-impact reveals, brand color matching, and product launch spectaculars designed to leave a lasting impression on your stakeholders.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
+                        <div class="service-card">
+                            <div class="service-icon"><i class="fa-solid fa-building-columns"></i></div>
+                            <h4>Civic & Festivals</h4>
+                            <p class="text-muted mt-3 mb-0">Massive, sky-filling barrages choreographed precisely to audio soundtracks. Designed to safely thrill thousands of attendees.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section section-padding" style="background-color: var(--bg-dark);">
+            <div class="container">
+                <div class="text-center mb-5 reveal">
+                    <div class="section-header">
+                        <h2>Gallery of Light</h2>
+                    </div>
+                </div>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item wide reveal">
+                        <img src="https://images.unsplash.com/photo-1498623116890-37e912163d5d?q=80&w=1000&auto=format&fit=crop" alt="Grand Finale">
+                        <div class="gallery-caption"><h4>Summer Festival Finale</h4></div>
+                    </div>
+                    <div class="gallery-item tall reveal">
+                        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?q=80&w=800&auto=format&fit=crop" alt="Purple Fireworks">
+                        <div class="gallery-caption"><h4>Centennial Gala</h4></div>
+                    </div>
+                    <div class="gallery-item reveal">
+                        <img src="https://images.unsplash.com/photo-1504221507732-5246c045949b?q=80&w=800&auto=format&fit=crop" alt="Colorful display">
+                        <div class="gallery-caption"><h4>Corporate Launch</h4></div>
+                    </div>
+                    <div class="gallery-item reveal">
+                        <img src="https://images.unsplash.com/photo-1533230623126-7f551b9e0783?q=80&w=800&auto=format&fit=crop" alt="Lakeside show">
+                        <div class="gallery-caption"><h4>Lakeside Wedding</h4></div>
+                    </div>
+                    <div class="gallery-item wide reveal">
+                        <img src="https://images.unsplash.com/photo-1542282811-943ef1a977c3?q=80&w=1000&auto=format&fit=crop" alt="Stadium Pyrotechnics">
+                        <div class="gallery-caption"><h4>Stadium Halftime Show</h4></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section section-padding">
+            <div class="container cta-content reveal">
+                <h2 class="display-4 text-light mb-4">Ready to Light Up the Night?</h2>
+                <p class="lead text-light mb-5 max-w-75 mx-auto" style="font-weight: 300;">Return to our intake form to provide your details, or contact our coordination team directly.</p>
+                <button class="btn btn-gold btn-lg" onclick="app.navigate('home', 'contact')">
+                    Start Planning Your Show
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="mb-2 font-oswald text-uppercase text-light" style="letter-spacing: 2px;">Classic Fireworks</p>
+            <p class="small mb-0">&copy; 2026 Classic Fireworks. All rights reserved. | Licensed, Bonded, Insured.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const app = {
+            // Setup Intersection Observer for scroll animations
+            initObserver: function() {
+                const options = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.15
+                };
+                
+                this.observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            // Optional: stop observing once revealed
+                            // observer.unobserve(entry.target); 
+                        }
+                    });
+                }, options);
+
+                this.observeElements();
+            },
+
+            observeElements: function() {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    // Reset active class when switching views to re-trigger animations
+                    el.classList.remove('active');
+                    this.observer.observe(el);
+                });
+            },
+
+            // View navigation logic (SPA simulation)
+            navigate: function(page, scrollToSectionId = null) {
+                // Hide all views
+                document.querySelectorAll('.view-container').forEach(el => {
+                    el.classList.add('d-none');
+                });
+                
+                // Update Nav links
+                document.querySelectorAll('.nav-link').forEach(el => {
+                    el.classList.remove('active-nav');
+                });
+
+                // Show target view
+                const targetPage = document.getElementById(`page-${page}`);
+                if (targetPage) {
+                    targetPage.classList.remove('d-none');
+                    document.getElementById(`nav-${page}`).classList.add('active-nav');
+                    
+                    // Close mobile nav if open
+                    const navbarCollapse = document.getElementById('navbarNav');
+                    if (navbarCollapse.classList.contains('show')) {
+                        bootstrap.Collapse.getInstance(navbarCollapse).hide();
+                    }
+
+                    // Re-trigger scroll observer for new page elements
+                    setTimeout(() => {
+                        this.observeElements();
+                        // Trigger check immediately for items in viewport
+                        window.dispatchEvent(new Event('scroll'));
+                    }, 50);
+
+                    // Handle specific section scrolling
+                    if (scrollToSectionId) {
+                        setTimeout(() => this.scrollTo(scrollToSectionId), 100);
+                    } else {
+                        window.scrollTo(0, 0);
+                    }
+                }
+            },
+
+            scrollTo: function(elementId) {
+                const el = document.getElementById(elementId);
+                if (el) {
+                    const navHeight = document.getElementById('mainNav').offsetHeight;
+                    const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                    
+                    window.scrollTo({
+                        top: elementPosition - navHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            },
+
+            // Form Validation and Submission Simulation
+            initForm: function() {
+                const form = document.getElementById('intakeForm');
+                const feedback = document.getElementById('formFeedback');
+                const btn = document.getElementById('submitBtn');
+
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    if (!form.checkValidity()) {
+                        e.stopPropagation();
+                        form.classList.add('was-validated');
+                        return;
+                    }
+
+                    // Simulate processing
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+                    btn.disabled = true;
+
+                    setTimeout(() => {
+                        form.classList.remove('was-validated');
+                        form.reset();
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        
+                        feedback.className = 'alert alert-success mt-4 d-block';
+                        feedback.innerHTML = '<strong><i class="fa-solid fa-check-circle me-2"></i>Request Received!</strong> Our team will contact you within 24 hours.';
+                        
+                        // Reset floating labels visual state via blur
+                        document.querySelectorAll('.form-control, .form-select').forEach(input => input.blur());
+
+                        setTimeout(() => {
+                            feedback.classList.remove('d-block');
+                            feedback.classList.add('d-none');
+                        }, 6000);
+                    }, 1500);
+                });
+            },
+
+            // Navbar Scroll Effect
+            initNavbar: function() {
+                const nav = document.getElementById('mainNav');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        nav.classList.add('scrolled');
+                    } else {
+                        nav.classList.remove('scrolled');
+                    }
+                });
+            }
+        };
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            app.initObserver();
+            app.initForm();
+            app.initNavbar();
+            
+            // Trigger initial scroll to catch elements already in viewport on load
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html>

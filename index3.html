@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Fireworks | Decades of Pure Spectacle</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-white" data-bs-spy="scroll" data-bs-target="#mainNav" tabindex="0">
+
+    <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 fixed-top shadow-sm backdrop-blur py-2">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <img src="assets/classiclogo.png" alt="Classic Fireworks Logo" class="brand-logo-img me-3">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-2">
+                    <li class="nav-item"><a class="nav-link text-uppercase fw-semibold" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase fw-semibold" href="#legacy">Legacy</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase fw-semibold" href="#services">Services</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn bg-red text-white fw-bold text-uppercase px-4 py-2" href="#home">Book Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="bg-hero position-relative d-flex align-items-center">
+        <!-- Dark overlay for legibility -->
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-10"></div>
+        
+            <span class="sparkle one">✦</span><span class="sparkle two">✧</span><span class="sparkle three">✦</span>
+        <div class="container position-relative z-1 py-5 mt-5">
+            <div class="row align-items-center g-5">
+                
+                <!-- Hero Text -->
+                <div class="col-lg-7 hero-copy">
+                    <p class="eyebrow text-uppercase mb-3">Curated light. Unforgettable nights.</p>
+                    <h1 class="display-3 fw-bolder text-uppercase mb-4 text-shadow-sm">Celebrating <span class="text-gold">Decades</span> of Pure Spectacle.</h1>
+                    <p class="lead fw-light mb-5 fs-4">From intimate weddings to massive city celebrations, Classic Fireworks defines the art of pyrotechnics with unrivaled passion and precision.</p>
+                    <a href="#legacy" class="btn btn-outline-light btn-lg px-5 py-3 text-uppercase fw-bold rounded-pill">Our Legacy &rsaquo;</a>
+                </div>
+                
+                <!-- Glassmorphism Intake Form -->
+                <div class="col-lg-5 hero-form">
+                    <div class="p-4 p-md-5 rounded-4 shadow-lg bg-white bg-opacity-10 border border-white border-opacity-25 backdrop-blur">
+                        <div class="eyebrow text-uppercase text-center mb-2">Start the celebration</div>
+                        <h3 class="mb-2 text-center fw-bold">PLAN YOUR EVENT</h3>
+                        <p class="text-white-50 text-center mb-4 small">Fields are all mandatory for processing.</p>
+                        
+                        <form onsubmit="event.preventDefault(); alert('Form submitted successfully!');">
+                            <div class="mb-3">
+                                <label for="name" class="form-label small text-white-50 mb-1">Name</label>
+                                <input type="text" class="form-control glass-input" id="name" required>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-sm-6">
+                                    <label for="phone" class="form-label small text-white-50 mb-1">Phone</label>
+                                    <input type="tel" class="form-control glass-input" id="phone" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="email" class="form-label small text-white-50 mb-1">Email</label>
+                                    <input type="email" class="form-control glass-input" id="email" required>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-sm-6">
+                                    <label for="eventDate" class="form-label small text-white-50 mb-1">Event Date</label>
+                                    <input type="date" class="form-control glass-input" id="eventDate" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="venueSize" class="form-label small text-white-50 mb-1">Venue Size</label>
+                                    <select class="form-select glass-input" id="venueSize" required>
+                                        <option value="" selected disabled>Select...</option>
+                                        <option value="small">Intimate (0-50 ppl)</option>
+                                        <option value="medium">Medium (50-200 ppl)</option>
+                                        <option value="large">Large (200-500 ppl)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="form-label small text-white-50 mb-1">Event Details</label>
+                                <textarea class="form-control glass-input" id="message" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn bg-red text-white w-100 py-3 fw-bold text-uppercase shadow-sm">Send Inquiry</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <section id="legacy" class="bg-legacy position-relative py-5">
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-10"></div>
+        
+        <div class="container position-relative z-1 py-5 my-md-5">
+            <div class="row">
+                <div class="col-lg-7 col-xl-6">
+                    <div class="p-4 p-md-5 bg-white rounded-4 shadow-lg text-dark border-start border-5 legacy-panel" style="border-color: var(--primary-gold) !important;">
+                        <p class="eyebrow text-uppercase mb-2" style="color: var(--accent-red);">A tradition of wonder</p>
+                        <h2 class="fw-bold mb-4 text-uppercase">Featured Displays & Legacy</h2>
+                        <p class="lead text-secondary fs-5">We have defined the art of pyrotechnics with unparalleled passion and precision for decades. Classic Fireworks has provided the iconic sparkle for events ranging from waterfront celebrations to massive multi-million dollar city shows across the globe.</p>
+                        <p class="text-secondary mb-4">Our legacy is built on safety, creativity, and awe-inspiring spectacle. When you partner with us, you are guaranteed a flawless execution.</p>
+                        <a href="#services" class="btn btn-dark px-4 py-2 text-uppercase fw-semibold">Discover Our Shows &rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="bg-services position-relative py-5">
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-10"></div>
+        
+        <div class="container position-relative z-1 py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-uppercase text-white mb-3">Display Services</h2>
+                <div class="mx-auto section-rule rounded"></div>
+            </div>
+            
+            <div class="row g-4 text-center">
+                <!-- Service 1 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 p-xl-5 bg-white bg-opacity-10 border border-white border-opacity-25 rounded-4 shadow-sm backdrop-blur text-white hover-lift">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="display-3 mb-4 service-icon">&#x1F48D;</div>
+                            <h4 class="card-title text-uppercase fw-bold text-gold mb-3">Weddings & Private</h4>
+                            <p class="card-text fw-light flex-grow-1 opacity-75">From a magical first dance to a grand finale, we stage unforgettable moments of intimacy and awe.</p>
+                            <a href="#home" class="btn btn-outline-light mt-4 px-4 rounded-pill">Inquire Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 p-xl-5 bg-white bg-opacity-10 border border-white border-opacity-25 rounded-4 shadow-sm backdrop-blur text-white hover-lift">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="display-3 mb-4 service-icon">&#x1F3EC;</div>
+                            <h4 class="card-title text-uppercase fw-bold text-gold mb-3">Corporate Events</h4>
+                            <p class="card-text fw-light flex-grow-1 opacity-75">Enhance your product launch, gala, or company milestone with perfectly synchronized branding effects.</p>
+                            <a href="#home" class="btn btn-outline-light mt-4 px-4 rounded-pill">Inquire Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 p-xl-5 bg-white bg-opacity-10 border border-white border-opacity-25 rounded-4 shadow-sm backdrop-blur text-white hover-lift">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="display-3 mb-4 service-icon">&#x1F303;</div>
+                            <h4 class="card-title text-uppercase fw-bold text-gold mb-3">Public Celebrations</h4>
+                            <p class="card-text fw-light flex-grow-1 opacity-75">Massive, city-defining shows designed for maximum impact and safety, from national holidays to festivals.</p>
+                            <a href="#home" class="btn btn-outline-light mt-4 px-4 rounded-pill">Inquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5 pt-4">
+                <p class="lead fw-light border border-white border-opacity-25 d-inline-block px-4 py-3 rounded-pill bg-dark bg-opacity-50 backdrop-blur">
+                    For show dates or urgent queries: <strong class="text-gold">(555) 012-3456</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-5 border-top border-secondary">
+        <div class="container">
+            <div class="row align-items-center text-center text-md-start g-4">
+                <div class="col-md-4 d-flex justify-content-center justify-content-md-start">
+                    <a href="#home" class="text-decoration-none">
+                        <img src="assets/classiclogo.png" alt="Classic Fireworks Logo" class="img-fluid opacity-75" style="max-height: 50px;">
+                    </a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <p class="mb-1 text-uppercase fw-semibold">&copy; 2026 Classic Fireworks</p>
+                    <p class="small text-white-50 mb-0">A century of illumination and safety.</p>
+                </div>
+                <div class="col-md-4 text-center text-md-end text-white-50 small">
+                    <p class="mb-1">Follow us for updates:</p>
+                    <p class="mb-0">@Classic_Fworks | (555) 012-3456</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
