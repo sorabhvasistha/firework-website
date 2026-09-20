@@ -243,17 +243,21 @@
         /* Floating labels customization for dark theme */
         .form-floating > .form-control,
         .form-floating > .form-select {
-            background-color: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text-light);
+            background-color: rgba(255,255,255,0.94);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #111827;
             border-radius: 6px;
         }
         .form-floating > .form-control:focus,
         .form-floating > .form-select:focus {
-            background-color: rgba(255,255,255,0.06);
+            background-color: #ffffff;
             border-color: var(--brand-gold);
             box-shadow: 0 0 0 0.25rem rgba(245, 197, 24, 0.25);
-            color: var(--text-light);
+            color: #111827;
+        }
+        .form-floating > .form-select option {
+            color: #111827;
+            background-color: #ffffff;
         }
         .form-floating > label {
             color: var(--text-muted);
