@@ -44,8 +44,9 @@
         /* Utility for fade-in animations on scroll */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            transform: translateY(18px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+            will-change: opacity, transform;
         }
         .reveal.active {
             opacity: 1;
@@ -152,7 +153,7 @@
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            background: url('assets/banner4.png') no-repeat center center/cover;
             z-index: -2;
             transform: scale(1.05);
             animation: slowZoom 20s infinite alternate;
@@ -273,6 +274,11 @@
 
         .services-section {
             background-color: var(--bg-darker);
+            background-image: url('assets/banner2.png');
+            background-opacity: 0.05;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         .service-card {
             background-color: var(--bg-card);
@@ -351,7 +357,7 @@
         }
 
         .cta-section {
-            background: url('https://images.unsplash.com/photo-1542282811-943ef1a977c3?q=80&w=1920&auto=format&fit=crop') center/cover fixed;
+            background: url('assets/banner1.png') center/cover fixed;
             position: relative;
             text-align: center;
         }
@@ -573,11 +579,11 @@
 
         <section class="services-section section-padding">
             <div class="container">
-                <div class="text-center mb-5 reveal">
+                <div class="text-center mb-5 reveal bg-dark bg-opacity-10 p-4 rounded">
                     <div class="section-header">
                         <h2>Our Expertise</h2>
                     </div>
-                    <p class="lead text-muted max-w-75 mx-auto">Engineered perfection for any scale. We craft bespoke experiences tailored to your specific audience and venue.</p>
+                    <p class="lead max-w-75 mx-auto">Engineered perfection for any scale. We craft bespoke experiences tailored to your specific audience and venue.</p>
                 </div>
                 
                 <div class="row g-4">
@@ -585,21 +591,21 @@
                         <div class="service-card">
                             <div class="service-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
                             <h4>Private & Weddings</h4>
-                            <p class="text-muted mt-3 mb-0">Elegant, romantic displays. We offer low-debris and quiet fireworks options perfect for sensitive venues or exclusive estates.</p>
+                            <p class="mt-3 mb-0">Elegant, romantic displays. We offer low-debris and quiet fireworks options perfect for sensitive venues or exclusive estates.</p>
                         </div>
                     </div>
                     <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
                         <div class="service-card">
                             <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
                             <h4>Corporate Events</h4>
-                            <p class="text-muted mt-3 mb-0">High-impact reveals, brand color matching, and product launch spectaculars designed to leave a lasting impression on your stakeholders.</p>
+                            <p class="mt-3 mb-0">High-impact reveals, brand color matching, and product launch spectaculars designed to leave a lasting impression on your stakeholders.</p>
                         </div>
                     </div>
                     <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
                         <div class="service-card">
                             <div class="service-icon"><i class="fa-solid fa-building-columns"></i></div>
                             <h4>Civic & Festivals</h4>
-                            <p class="text-muted mt-3 mb-0">Massive, sky-filling barrages choreographed precisely to audio soundtracks. Designed to safely thrill thousands of attendees.</p>
+                            <p class="mt-3 mb-0">Massive, sky-filling barrages choreographed precisely to audio soundtracks. Designed to safely thrill thousands of attendees.</p>
                         </div>
                     </div>
                 </div>
@@ -616,23 +622,23 @@
                 
                 <div class="gallery-grid">
                     <div class="gallery-item wide reveal">
-                        <img src="https://images.unsplash.com/photo-1498623116890-37e912163d5d?q=80&w=1000&auto=format&fit=crop" alt="Grand Finale">
+                        <img src="assets/banner1.png" alt="Grand Finale">
                         <div class="gallery-caption"><h4>Summer Festival Finale</h4></div>
                     </div>
                     <div class="gallery-item tall reveal">
-                        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?q=80&w=800&auto=format&fit=crop" alt="Purple Fireworks">
+                        <img src="assets/banner2.png" alt="Purple Fireworks">
                         <div class="gallery-caption"><h4>Centennial Gala</h4></div>
                     </div>
                     <div class="gallery-item reveal">
-                        <img src="https://images.unsplash.com/photo-1504221507732-5246c045949b?q=80&w=800&auto=format&fit=crop" alt="Colorful display">
+                        <img src="assets/banner3.png" alt="Colorful display">
                         <div class="gallery-caption"><h4>Corporate Launch</h4></div>
                     </div>
                     <div class="gallery-item reveal">
-                        <img src="https://images.unsplash.com/photo-1533230623126-7f551b9e0783?q=80&w=800&auto=format&fit=crop" alt="Lakeside show">
+                        <img src="assets/banner1.png" alt="Lakeside show">
                         <div class="gallery-caption"><h4>Lakeside Wedding</h4></div>
                     </div>
                     <div class="gallery-item wide reveal">
-                        <img src="https://images.unsplash.com/photo-1542282811-943ef1a977c3?q=80&w=1000&auto=format&fit=crop" alt="Stadium Pyrotechnics">
+                        <img src="assets/banner4.png" alt="Stadium Pyrotechnics">
                         <div class="gallery-caption"><h4>Stadium Halftime Show</h4></div>
                     </div>
                 </div>
@@ -666,8 +672,8 @@
             initObserver: function() {
                 const options = {
                     root: null,
-                    rootMargin: '0px',
-                    threshold: 0.15
+                    rootMargin: '0px 0px -10% 0px',
+                    threshold: 0.08
                 };
                 
                 this.observer = new IntersectionObserver((entries, observer) => {
@@ -684,8 +690,11 @@
             },
 
             observeElements: function() {
+                if (this.observer) {
+                    this.observer.disconnect();
+                }
+
                 document.querySelectorAll('.reveal').forEach(el => {
-                    // Reset active class when switching views to re-trigger animations
                     el.classList.remove('active');
                     this.observer.observe(el);
                 });
